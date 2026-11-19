@@ -1,0 +1,206 @@
+{
+  "records_loaded": 5000,
+  "executive": {
+    "total_tickets": 5000,
+    "sla_met_count": 3965,
+    "sla_compliance_pct": 79.3,
+    "avg_mttr_hours": 16.41,
+    "repeat_incident_pct": 12.66
+  },
+  "by_priority": [
+    {
+      "priority": "P1 - Critical",
+      "ticket_count": 496,
+      "sla_target_hrs": 4.0,
+      "avg_mttr_hrs": 2.6,
+      "sla_compliance_pct": 83.87,
+      "sla_breaches": 80
+    },
+    {
+      "priority": "P2 - High",
+      "ticket_count": 1277,
+      "sla_target_hrs": 8.0,
+      "avg_mttr_hrs": 5.85,
+      "sla_compliance_pct": 77.13,
+      "sla_breaches": 292
+    },
+    {
+      "priority": "P3 - Medium",
+      "ticket_count": 2234,
+      "sla_target_hrs": 24.0,
+      "avg_mttr_hrs": 17.41,
+      "sla_compliance_pct": 79.27,
+      "sla_breaches": 463
+    },
+    {
+      "priority": "P4 - Low",
+      "ticket_count": 993,
+      "sla_target_hrs": 48.0,
+      "avg_mttr_hrs": 34.64,
+      "sla_compliance_pct": 79.86,
+      "sla_breaches": 200
+    }
+  ],
+  "monthly": [
+    {
+      "month": "2025-11",
+      "total_tickets": 415,
+      "avg_mttr_hours": 16.14,
+      "sla_pct": 80.0,
+      "mom_sla_change_pct": null
+    },
+    {
+      "month": "2025-12",
+      "total_tickets": 439,
+      "avg_mttr_hours": 17.68,
+      "sla_pct": 75.85,
+      "mom_sla_change_pct": -4.15
+    },
+    {
+      "month": "2026-01",
+      "total_tickets": 469,
+      "avg_mttr_hours": 15.59,
+      "sla_pct": 79.96,
+      "mom_sla_change_pct": 4.11
+    },
+    {
+      "month": "2026-02",
+      "total_tickets": 360,
+      "avg_mttr_hours": 16.95,
+      "sla_pct": 77.5,
+      "mom_sla_change_pct": -2.46
+    },
+    {
+      "month": "2026-03",
+      "total_tickets": 437,
+      "avg_mttr_hours": 16.84,
+      "sla_pct": 83.3,
+      "mom_sla_change_pct": 5.8
+    },
+    {
+      "month": "2026-04",
+      "total_tickets": 426,
+      "avg_mttr_hours": 17.06,
+      "sla_pct": 78.17,
+      "mom_sla_change_pct": -5.13
+    },
+    {
+      "month": "2026-05",
+      "total_tickets": 404,
+      "avg_mttr_hours": 16.48,
+      "sla_pct": 78.47,
+      "mom_sla_change_pct": 0.3
+    },
+    {
+      "month": "2026-06",
+      "total_tickets": 387,
+      "avg_mttr_hours": 16.5,
+      "sla_pct": 79.33,
+      "mom_sla_change_pct": 0.86
+    },
+    {
+      "month": "2026-07",
+      "total_tickets": 391,
+      "avg_mttr_hours": 16.21,
+      "sla_pct": 79.54,
+      "mom_sla_change_pct": 0.21
+    },
+    {
+      "month": "2026-08",
+      "total_tickets": 434,
+      "avg_mttr_hours": 17.26,
+      "sla_pct": 79.95,
+      "mom_sla_change_pct": 0.41
+    },
+    {
+      "month": "2026-09",
+      "total_tickets": 385,
+      "avg_mttr_hours": 15.5,
+      "sla_pct": 79.74,
+      "mom_sla_change_pct": -0.21
+    },
+    {
+      "month": "2026-10",
+      "total_tickets": 453,
+      "avg_mttr_hours": 14.8,
+      "sla_pct": 79.47,
+      "mom_sla_change_pct": -0.27
+    }
+  ],
+  "pareto_breaches": [
+    {
+      "root_cause": "Fiber Cut / ISP Upstream",
+      "breach_count": 238,
+      "pct_of_breaches": 23.0,
+      "cumulative_pct": 23.0
+    },
+    {
+      "root_cause": "Power / UPS Fluctuation",
+      "breach_count": 190,
+      "pct_of_breaches": 18.36,
+      "cumulative_pct": 41.35
+    },
+    {
+      "root_cause": "Database Lock / Timeout",
+      "breach_count": 161,
+      "pct_of_breaches": 15.56,
+      "cumulative_pct": 56.91
+    },
+    {
+      "root_cause": "Server CPU / Memory Spike",
+      "breach_count": 145,
+      "pct_of_breaches": 14.01,
+      "cumulative_pct": 70.92
+    },
+    {
+      "root_cause": "User Misconfiguration",
+      "breach_count": 103,
+      "pct_of_breaches": 9.95,
+      "cumulative_pct": 80.87
+    },
+    {
+      "root_cause": "OS / Driver Patch Failure",
+      "breach_count": 100,
+      "pct_of_breaches": 9.66,
+      "cumulative_pct": 90.53
+    },
+    {
+      "root_cause": "Switch / Router Config Drift",
+      "breach_count": 98,
+      "pct_of_breaches": 9.47,
+      "cumulative_pct": 100.0
+    }
+  ],
+  "by_region": [
+    {
+      "region": "Sukabumi",
+      "tickets": 1018,
+      "avg_mttr_hours": 18.49,
+      "sla_compliance_pct": 74.17
+    },
+    {
+      "region": "Bogor",
+      "tickets": 1011,
+      "avg_mttr_hours": 15.68,
+      "sla_compliance_pct": 80.02
+    },
+    {
+      "region": "Bandung",
+      "tickets": 1035,
+      "avg_mttr_hours": 16.29,
+      "sla_compliance_pct": 80.1
+    },
+    {
+      "region": "Jakarta Selatan",
+      "tickets": 981,
+      "avg_mttr_hours": 15.51,
+      "sla_compliance_pct": 80.73
+    },
+    {
+      "region": "Depok",
+      "tickets": 955,
+      "avg_mttr_hours": 16.03,
+      "sla_compliance_pct": 81.68
+    }
+  ]
+}

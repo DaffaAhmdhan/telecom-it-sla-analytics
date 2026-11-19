@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telecom & IT Service SLA Analytics | Daffa Ahmadhan K.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { background-color: #0B0F19; color: #E2E8F0; font-family: system-ui, -apple-system, sans-serif; }
+    .card { background: rgba(17, 24, 39, 0.85); border: 1px solid rgba(255,255,255,0.08); }
+  </style>
+</head>
+<body class="p-6 md:p-10">
+  <div class="max-w-7xl mx-auto space-y-8">
+    <header class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-gray-800 pb-6">
+      <div>
+        <span class="text-xs font-mono uppercase tracking-widest text-indigo-400">SQL &bull; Star Schema &bull; Operational BI</span>
+        <h1 class="text-2xl md:text-3xl font-bold text-white mt-1">Telecom & IT Service SLA Analytics</h1>
+        <p class="text-sm text-gray-400 mt-1">5,000 incident tickets analyzed across 5 regions, 4 priority tiers, and 12 months (Nov 2025 – Oct 2026).</p>
+      </div>
+      <div class="text-xs font-mono text-gray-400 bg-gray-900 px-3 py-2 rounded-lg border border-gray-800">
+        Author: Daffa Ahmadhan Khusumah
+      </div>
+    </header>
+
+    <!-- KPI Cards -->
+    <section class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="card rounded-xl p-5">
+        <p class="text-xs text-gray-400 uppercase font-mono">Total Tickets</p>
+        <p class="text-3xl font-bold text-white mt-2">5,000</p>
+        <p class="text-xs text-emerald-400 mt-1">3,965 within SLA</p>
+      </div>
+      <div class="card rounded-xl p-5">
+        <p class="text-xs text-gray-400 uppercase font-mono">SLA Compliance</p>
+        <p class="text-3xl font-bold text-indigo-400 mt-2">79.3%</p>
+        <p class="text-xs text-amber-400 mt-1">Target: 90.0% (-10.7% gap)</p>
+      </div>
+      <div class="card rounded-xl p-5">
+        <p class="text-xs text-gray-400 uppercase font-mono">Avg MTTR</p>
+        <p class="text-3xl font-bold text-white mt-2">16.41 hrs</p>
+        <p class="text-xs text-gray-400 mt-1">P1 Critical avg: 2.60 hrs</p>
+      </div>
+      <div class="card rounded-xl p-5">
+        <p class="text-xs text-gray-400 uppercase font-mono">Repeat Incident Rate</p>
+        <p class="text-3xl font-bold text-rose-400 mt-2">12.66%</p>
+        <p class="text-xs text-gray-400 mt-1">Driven by Fiber & Config Drift</p>
+      </div>
+    </section>
+
+    <!-- Charts Row 1 -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card rounded-xl p-6">
+        <h2 class="text-base font-semibold text-white mb-4">Monthly SLA Compliance (%) & Ticket Volume</h2>
+        <canvas id="monthlyChart" height="140"></canvas>
+      </div>
+      <div class="card rounded-xl p-6">
+        <h2 class="text-base font-semibold text-white mb-4">Pareto Analysis: SLA Breaches by Root Cause</h2>
+        <canvas id="paretoChart" height="140"></canvas>
+      </div>
+    </section>
+
+    <!-- Charts Row 2 -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card rounded-xl p-6">
+        <h2 class="text-base font-semibold text-white mb-4">SLA Compliance by Region (%)</h2>
+        <canvas id="regionChart" height="130"></canvas>
+      </div>
+      <div class="card rounded-xl p-6">
+        <h2 class="text-base font-semibold text-white mb-4">Priority Tier Performance</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="text-gray-400 border-b border-gray-800 font-mono">
+              <tr>
+                <th class="py-2">Priority</th>
+                <th class="py-2">Tickets</th>
+                <th class="py-2">Target (h)</th>
+                <th class="py-2">Avg MTTR (h)</th>
+                <th class="py-2">SLA %</th>
+                <th class="py-2">Breaches</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800/70">
+              <tr><td class="py-2.5 font-medium text-rose-300">P1 - Critical</td><td>496</td><td>4.0</td><td>2.60</td><td class="text-emerald-400 font-semibold">83.87%</td><td>80</td></tr>
+              <tr><td class="py-2.5 font-medium text-amber-300">P2 - High</td><td>1,277</td><td>8.0</td><td>5.85</td><td class="text-amber-400 font-semibold">77.13%</td><td>292</td></tr>
+              <tr><td class="py-2.5 font-medium text-blue-300">P3 - Medium</td><td>2,234</td><td>24.0</td><td>17.41</td><td class="text-gray-200 font-semibold">79.27%</td><td>463</td></tr>
+              <tr><td class="py-2.5 font-medium text-gray-300">P4 - Low</td><td>993</td><td>48.0</td><td>34.64</td><td class="text-gray-200 font-semibold">79.86%</td><td>200</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const monthly = [
+      {m: "2025-11", t: 415, s: 80.0}, {m: "2025-12", t: 439, s: 75.85},
+      {m: "2026-01", t: 469, s: 79.96}, {m: "2026-02", t: 360, s: 77.5},
+      {m: "2026-03", t: 437, s: 83.3}, {m: "2026-04", t: 426, s: 78.17},
+      {m: "2026-05", t: 404, s: 78.47}, {m: "2026-06", t: 387, s: 79.33},
+      {m: "2026-07", t: 391, s: 79.54}, {m: "2026-08", t: 434, s: 79.95},
+      {m: "2026-09", t: 385, s: 79.74}, {m: "2026-10", t: 453, s: 79.47}
+    ];
+    new Chart(document.getElementById("monthlyChart"), {
+      type: "bar",
+      data: {
+        labels: monthly.map(d => d.m),
+        datasets: [
+          { type: "line", label: "SLA %", data: monthly.map(d => d.s), borderColor: "#6366f1", yAxisID: "y1", tension: 0.3 },
+          { label: "Tickets", data: monthly.map(d => d.t), backgroundColor: "rgba(99, 102, 241, 0.25)", yAxisID: "y" }
+        ]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#94a3b8" } },
+          y1: { position: "right", min: 65, max: 95, grid: { display: false }, ticks: { color: "#818cf8" } },
+          x: { ticks: { color: "#94a3b8" } }
+        },
+        plugins: { legend: { labels: { color: "#cbd5e1" } } }
+      }
+    });
+
+    const pareto = [
+      {c: "Fiber Cut / ISP", n: 238, cum: 23.0},
+      {c: "Power / UPS", n: 190, cum: 41.35},
+      {c: "DB Lock / Timeout", n: 161, cum: 56.91},
+      {c: "CPU / Memory Spike", n: 145, cum: 70.92},
+      {c: "User Misconfig", n: 103, cum: 80.87},
+      {c: "OS / Driver Patch", n: 100, cum: 90.53},
+      {c: "Config Drift", n: 98, cum: 100.0}
+    ];
+    new Chart(document.getElementById("paretoChart"), {
+      type: "bar",
+      data: {
+        labels: pareto.map(d => d.c),
+        datasets: [
+          { type: "line", label: "Cumulative %", data: pareto.map(d => d.cum), borderColor: "#f43f5e", yAxisID: "y1", tension: 0.2 },
+          { label: "Breaches", data: pareto.map(d => d.n), backgroundColor: "rgba(244, 63, 94, 0.35)", yAxisID: "y" }
+        ]
+      },
+      options: {
+        scales: {
+          y: { beginAtZero: true, grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#94a3b8" } },
+          y1: { position: "right", min: 0, max: 105, grid: { display: false }, ticks: { color: "#fb7185" } },
+          x: { ticks: { color: "#94a3b8", maxRotation: 25 } }
+        },
+        plugins: { legend: { labels: { color: "#cbd5e1" } } }
+      }
+    });
+
+    const regions = [
+      {r: "Sukabumi", s: 74.17}, {r: "Bogor", s: 80.02},
+      {r: "Bandung", s: 80.10}, {r: "Jakarta Selatan", s: 80.73}, {r: "Depok", s: 81.68}
+    ];
+    new Chart(document.getElementById("regionChart"), {
+      type: "bar",
+      data: {
+        labels: regions.map(d => d.r),
+        datasets: [{
+          label: "SLA Compliance %",
+          data: regions.map(d => d.s),
+          backgroundColor: regions.map(d => d.s < 76 ? "#f43f5e" : "#10b981")
+        }]
+      },
+      options: {
+        indexAxis: "y",
+        scales: {
+          x: { min: 65, max: 90, grid: { color: "rgba(255,255,255,0.05)" }, ticks: { color: "#94a3b8" } },
+          y: { ticks: { color: "#e2e8f0" } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
+</body>
+</html>
